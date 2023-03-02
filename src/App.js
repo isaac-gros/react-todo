@@ -1,7 +1,10 @@
-function App() {
+import TasksList from "./components/TasksList/TasksList";
+
+const App = () => {
   return (
     <div className="app">
-      <h1>Hello world !</h1>
+      <h1>TODO App</h1>
+      <TasksList/>
     </div>
   );
 }
