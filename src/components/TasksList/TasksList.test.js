@@ -1,31 +1,21 @@
-import { render, screen } from '@testing-library/react';
-import TasksList from './TasksList';
+import { render, screen } from '@testing-library/react'
+import TasksList from './TasksList'
+import { correctFixtures, wrongFixtures } from '../../fixtures/todos'
 
-const fixtures = [
-    {
-        id: 1,
-        content: 'Learn more about TDD',
-        isDone: false,
-    },
-    {
-        id: 2,
-        content: 'Learn more about BDD',
-        isDone: false,
-    },
-    {
-        id: 3,
-        content: 'Check what does "Foo" stands for',
-        isDone: true,
-    },
-]
+test('Should handle empty tasks prop', () => {
+    render(<TasksList />)
+    let todoList = screen.queryByRole('list')
+    expect(todoList).toBeEmptyDOMElement()
+})
 
-test('Tasks list is empty', () => {
-    const { container } = render(<TasksList />)
-    expect(container.querySelector('ul')).toBeEmptyDOMElement()
-});
+test('Should displays tasks passed with props', () => {
+    render(<TasksList tasks={correctFixtures} />)
+    let tasks = screen.queryAllByRole('listitem')
+    expect(tasks.length).toBeGreaterThan(0)
+})
 
-test('Tasks list displays tasks', () => {
-    
-    const { container } = render(<TasksList tasks={fixtures} />);
-    expect(container.lastElementChild).toHaveTextContent()
-});
+test('Should handle badly formatted tasks', () => {
+    render(<TasksList tasks={wrongFixtures} />)
+    let tasks = screen.queryByRole('listitem')
+    expect(tasks).toBe(null)
+})

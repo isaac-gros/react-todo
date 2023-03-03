@@ -1,23 +1,20 @@
-import { useState } from "react"
-
 const TasksList = props => {
-
-    const tasksView = []
-    if (props.tasks) {
-        for (const key in props.tasks) {
-            let task = props.tasks[key]
-            let taskAppearance = task.isDone ? <span>task.content</span> : <s>task.content</s>
-            tasksView.push(
-                <li key={key}>{taskAppearance}</li>
-            )
-        }
-    }
-
     return (
         <div className="list">
             <h1>My tasks</h1>
-            <ul>
-                {tasksView}
+            <ul id="todo-list" role="list">
+
+                {/* Map over tasks prop */}
+                {(props.tasks && typeof(props.tasks) == 'object' ) ? props.tasks.map((task, key) => (
+
+                    // Display a <li> element if the task is
+                    // in the correct format
+                    (task.content && task.id && task.isDone != null) ? (
+                        <li key={task.id} role="listitem">
+                            {task.isDone ? <s>{task.content}</s> : <span>{task.content}</span>}
+                        </li>
+                    ) : null
+                )) : <></> }
             </ul>
         </div>
     )
