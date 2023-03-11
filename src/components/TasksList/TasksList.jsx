@@ -3,7 +3,7 @@ import Task from "../Task/Task"
 const TasksList = props => {
     return (
         <div className="list">
-            <h1>My tasks</h1>
+            <b>My tasks</b>
             <ul id="todo-list" role="list">
 
                 {/* Map over tasks prop */}

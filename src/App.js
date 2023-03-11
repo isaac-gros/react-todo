@@ -2,10 +2,12 @@ import { useState } from "react";
 import AddTask from "./components/Buttons/AddTask";
 import TasksList from "./components/TasksList/TasksList";
 import { correctFixtures } from "./fixtures/todos";
+import './App.css'
 
 const App = () => {
 
   const [tasks, setTasks] = useState(correctFixtures)
+
   const newTaskHandler = (taskContent) => {
     let lastTask = tasks[tasks.length - 1]
     if (taskContent) {
