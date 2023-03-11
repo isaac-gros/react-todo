@@ -1,3 +1,5 @@
+import Task from "../Task/Task"
+
 const TasksList = props => {
     return (
         <div className="list">
@@ -5,14 +7,12 @@ const TasksList = props => {
             <ul id="todo-list" role="list">
 
                 {/* Map over tasks prop */}
-                {(props.tasks && typeof(props.tasks) == 'object' ) ? props.tasks.map((task, key) => (
+                {(props.tasks && typeof(props.tasks) == 'object' ) ? props.tasks.map(task => (
 
-                    // Display a <li> element if the task is
+                    // Display a <Task> element if the task is
                     // in the correct format
                     (task.content && task.id && task.isDone != null) ? (
-                        <li key={task.id} role="listitem">
-                            {task.isDone ? <s>{task.content}</s> : <span>{task.content}</span>}
-                        </li>
+                        <Task key={task.id} isDone={task.isDone} content={task.content} />
                     ) : null
                 )) : <></> }
             </ul>
