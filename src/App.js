@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AddTask from "./components/Buttons/AddTask";
+import AddTask from "./components/AddTask/AddTask";
 import TasksList from "./components/TasksList/TasksList";
 import { correctFixtures } from "./fixtures/todos";
 import './App.css'
