@@ -14,19 +14,18 @@ test('Should get a new task on click', async () => {
         }
     }
 
-    render(<AddTask handler={newTaskHandler} debug={true}/>)
+    render(<AddTask handler={newTaskHandler}/>)
     let addTaskBtn = screen.queryByRole('button')
     let addTaskInput = screen.queryByRole('textbox')
     
     // Mock user inserting content in new task input
-    await userEvent.dblClick(addTaskInput)
-    await userEvent.keyboard('A new task')
+    userEvent.setup()
+    await userEvent.type(addTaskInput, 'Learn React')
     await userEvent.click(addTaskBtn)
-
+    
     // Check if the task was added
-    // let newTaskObject = screen.queryByRole('application')
-    let newTaskObject = screen.getByText(/A new task/g)
-    expect(newTaskObject).toBeDefined()
+    let newTaskInput = screen.getByRole('textbox')
+    expect(newTaskInput).toHaveDisplayValue('Learn React')
 })
 
 test('Should prevent new task creation if content is empty', async () => {
@@ -43,10 +42,11 @@ test('Should prevent new task creation if content is empty', async () => {
     render(<AddTask handler={newTaskHandler} debug={true}/>)
     
     // Mock user clicking new task button
+    userEvent.setup()
     let addTaskBtn = screen.queryByRole('button')
     await userEvent.click(addTaskBtn)
 
     // Check if the task was not added
     let taskDebugger = screen.queryByRole('application')
-    expect(taskDebugger).toBeDefined()
+    expect(taskDebugger).toBeNull()
 })

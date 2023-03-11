@@ -22,7 +22,7 @@ const App = () => {
     <div className="app">
       <h1>TODO App</h1>
       <TasksList tasks={tasks}/>
-      <AddTask handler={newTaskHandler} debug={true}/>
+      <AddTask handler={newTaskHandler}/>
     </div>
   );
 }
